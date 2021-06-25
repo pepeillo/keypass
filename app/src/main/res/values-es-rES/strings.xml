@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="prompt_password">Contraseña</string>
+    <string name="login_failed">Validación incorrecta.</string>
+    <string name="prompt_delete">Borrar</string>
+    <string name="prompt_title">Título</string>
+    <string name="prompt_username">Usuario</string>
+    <string name="prompt_url">Página web</string>
+    <string name="prompt_notes">Notes</string>
+    <string name="prompt_element">Elemento</string>
+    <string name="prompt_import">Importar</string>
+    <string name="prompt_change_password">Cambiar contraseña</string>
+    <string name="prompt_loading">Cargando datos...</string>
+    <string name="prompt_data">Datos</string>
+    <string name="tap_again">Pulsa de nuevo para salir.</string>
+    <string name="prompt_exit">Salir</string>
+    <string name="prompt_options">Opciones</string>
+    <string name="prompt_export">Exportar</string>
+    <string name="prompt_file">Fichero</string>
+    <string name="prompt_process_ok">Proceso finalizado correctamente. %1$s registros.</string>
+    <string name="prompt_process_err">Proceso finalizado con errores.</string>
+    <string name="prompt_folder">Carpeta</string>
+    <string name="up">Arriba</string>
+    <string name="neww">Nueva</string>
+    <string name="select">Seleccionar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="allow_storage_permission">Permitir ver ficheros</string>
+    <string name="prompt_delete_previous_data">Borrar datos existentes</string>
+    <string name="prompt_select_a_file">Selecciona un fichero para importar</string>
+    <string name="prompt_select_a_folder">Selecciona una carpeta</string>
+    <string name="prompt_current_location">Ubicación actual</string>
+    <string name="prompt_location">Ubicación</string>
+    <string name="prompt_current_password">Contraseña actual</string>
+    <string name="prompt_new_password">Nueva contraseña</string>
+    <string name="prompt_repeat_password">Repetir contraseña</string>
+    <string name="err_pwd1">la nueva contraseña debe ser distinta de la actual.</string>
+    <string name="err_pwd2">La contraseña actual no es correcta.</string>
+    <string name="err_pwd3">No ha sido posible cambiar la contraseña.</string>
+    <string name="err_pwd4">la nueva contraseña debe ser igual que la repetición y no puede estar vacía.</string>
+    <string name="prompt_password_changed">Contraseña cambiada correctamente.</string>
+    <string name="confirm_delete">¿Realmente deseas borrar el registro seleccionado?\n\n%1$s\n\nEsta operación no se puede
+        deshacer.
+    </string>
+    <string name="prompt_new">Nuevo</string>
+
+</resources>

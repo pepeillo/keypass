@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="es.jaf.example.kp">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+            android:name=".GlobalApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:requestLegacyExternalStorage="true"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true">
+
+        <activity
+                android:name=".ChangePasswordActivity"
+                android:label="@string/prompt_change_password"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".ExportActivity"
+                android:label="@string/prompt_export"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".ImportActivity"
+                android:label="@string/prompt_import"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".OptionsActivity"
+                android:label="@string/prompt_options"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".ElementActivity"
+                android:label="@string/prompt_element"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".ElementsActivity"
+                android:label="@string/prompt_data"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".folderpicker.FolderPicker"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".MainActivity"
+                android:label="@string/app_name"
+                android:noHistory="true"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

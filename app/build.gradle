@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    configurations {
+        all {
+            exclude module: 'commons-logging'
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file(keystore)
+            storePassword keystore_password
+            keyAlias key_alias
+            keyPassword key_password
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "es.jaf.example.kp"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        signingConfig signingConfigs.release
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'net.zetetic:android-database-sqlcipher:4.4.3@aar'
+    implementation 'androidx.sqlite:sqlite:2.1.0'
+    implementation 'com.opencsv:opencsv:5.4'
+}
