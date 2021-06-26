@@ -2,10 +2,11 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
       xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
-tools:ignore="AlwaysShowAction">
-    <item android:id="@+id/newElement"
-          android:icon="@android:drawable/ic_menu_add"
+      tools:ignore="AlwaysShowAction">
+
+    <item android:id="@+id/delete_element"
+          android:icon="@drawable/trash"
           android:enabled="true"
-          android:title="@string/prompt_new"
+          android:title="@string/prompt_delete"
           android:showAsAction="always" />
 </menu>

@@ -14,16 +14,13 @@ import java.io.File;
 import java.util.List;
 
 public class CustomListAdapter extends ArrayAdapter<ElementStructure> {
-
-    private final IElementAction listener;
     private final Activity context;
     private final List<ElementStructure> records;
 
-    public CustomListAdapter(Activity context, IElementAction listener, List<ElementStructure> records) {
+    public CustomListAdapter(Activity context, List<ElementStructure> records) {
         super(context, 0, records);
         this.context = context;
         this.records = records;
-        this.listener = listener;
     }
 
     @Override
@@ -35,13 +32,6 @@ public class CustomListAdapter extends ArrayAdapter<ElementStructure> {
         }
         TextView expandedListTextView = convertView.findViewById(R.id.expandedListItem);
         expandedListTextView.setText(element.getTitle());
-        convertView.findViewById(R.id.cmdDelete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.cmdDeleteClick(listPosition);
-            }
-        });
-
         return convertView;
     }
 

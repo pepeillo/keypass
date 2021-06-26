@@ -10,12 +10,5 @@
         android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:paddingTop="10dp"
-        android:layout_weight="1"
         android:paddingBottom="10dp" />
-    <ImageView
-            android:layout_gravity="center_vertical"
-            android:id="@+id/cmdDelete"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/trash" />
 </LinearLayout>

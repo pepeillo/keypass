@@ -15,7 +15,7 @@ import es.jaf.example.kp.database.DbManager;
 
 import java.util.List;
 
-public class ElementsActivity extends Activity implements IElementAction {
+public class ElementsActivity extends Activity {
     ListView listView;
     CustomListAdapter itemsAdapter;
     List<ElementStructure> records;
@@ -67,23 +67,12 @@ public class ElementsActivity extends Activity implements IElementAction {
                     itemsAdapter.clear();
                     itemsAdapter.addAll(records);
                     itemsAdapter.notifyDataSetChanged();
-                }
-            }
-        }
-    }
-
-    @Override
-    public void cmdDeleteClick(int position) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(ElementsActivity.this);
-        dialog.setTitle(R.string.app_name)
-                .setIcon(android.R.drawable.ic_menu_help)
-                .setMessage(ElementsActivity.this.getString(R.string.confirm_delete, records.get(position).getTitle()))
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.yes, (dialog1, id) -> {
+                    dbManager.closeDatabase();
+                } else if ("delete".equalsIgnoreCase(action)) {
                     DbManager dbManager = GlobalApplication.getInstance().getDbManager();
                     try {
                         dbManager.openDatabase(GlobalApplication.getInstance().getPassword());
-                        dbManager.delete(records.get(position).getId());
+                        dbManager.delete(Integer.parseInt(id));
                     } catch (Exception e) {
                         Toast.makeText(ElementsActivity.this, "Error:" + e.getMessage(), Toast.LENGTH_LONG).show();
                     } finally {
@@ -91,12 +80,11 @@ public class ElementsActivity extends Activity implements IElementAction {
                         itemsAdapter.clear();
                         itemsAdapter.addAll(records);
                         itemsAdapter.notifyDataSetChanged();
-                        dialog1.dismiss();
+                        dbManager.closeDatabase();
                     }
-                })
-                .setNegativeButton(android.R.string.no, (dialog12, id) -> dialog12.dismiss());
-
-        dialog.show();
+                }
+            }
+        }
     }
 
     private class AsyncGenerateCipherDatabase extends AsyncTask<Void, Void, Integer> {
@@ -133,7 +121,7 @@ public class ElementsActivity extends Activity implements IElementAction {
         protected void onPostExecute(Integer result) {
             GlobalApplication.getInstance().hideProgress();
             if (result == 0) {
-                itemsAdapter = new CustomListAdapter(ElementsActivity.this, ElementsActivity.this, records);
+                itemsAdapter = new CustomListAdapter(ElementsActivity.this, records);
                 listView.setAdapter(itemsAdapter);
             } else {
                 dialog.setTitle(R.string.app_name)

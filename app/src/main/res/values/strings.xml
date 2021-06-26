@@ -39,6 +39,6 @@
     <string name="err_pwd3">Unable to change password.</string>
     <string name="err_pwd4">The new password must be equals than repetition and must be informed (not empty).</string>
     <string name="prompt_password_changed">Password changed successfully.</string>
-    <string name="confirm_delete">Do you want to delete this record?\n\n%1$s\n\nThis option can\'t be undone.</string>
+    <string name="confirm_delete">Do you want to delete this record?\nThis option can\'t be undone.</string>
     <string name="prompt_new">New</string>
 </resources>

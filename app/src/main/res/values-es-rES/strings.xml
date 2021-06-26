@@ -38,9 +38,8 @@
     <string name="err_pwd3">No ha sido posible cambiar la contraseña.</string>
     <string name="err_pwd4">la nueva contraseña debe ser igual que la repetición y no puede estar vacía.</string>
     <string name="prompt_password_changed">Contraseña cambiada correctamente.</string>
-    <string name="confirm_delete">¿Realmente deseas borrar el registro seleccionado?\n\n%1$s\n\nEsta operación no se puede
-        deshacer.
-    </string>
+    <string name="confirm_delete">¿Realmente deseas borrar el registro seleccionado?\nEsta operación no se puede
+        deshacer.</string>
     <string name="prompt_new">Nuevo</string>
 
 </resources>
