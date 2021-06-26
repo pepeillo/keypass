@@ -2,7 +2,6 @@ package es.jaf.example.kp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,13 +9,13 @@ import android.os.Process;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.*;
+import android.widget.ListView;
+import android.widget.Toast;
 import es.jaf.example.kp.database.DbManager;
 
 import java.util.List;
 
-public class ElementsActivity extends Activity implements IElementAction{
+public class ElementsActivity extends Activity implements IElementAction {
     ListView listView;
     CustomListAdapter itemsAdapter;
     List<ElementStructure> records;
@@ -27,19 +26,16 @@ public class ElementsActivity extends Activity implements IElementAction{
         setContentView(R.layout.activity_elements);
 
         listView = findViewById(R.id.listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ElementStructure element = records.get(position);
-                Intent intent = new Intent(ElementsActivity.this, ElementActivity.class);
-                intent.putExtra("id", "" + element.getId());
-                intent.putExtra("title", element.getTitle());
-                intent.putExtra("username", element.getUserName());
-                intent.putExtra("password", element.getPassword());
-                intent.putExtra("url", element.getUrl());
-                intent.putExtra("notes", element.getNotes());
-                startActivityForResult(intent, 1001);
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            ElementStructure element = records.get(position);
+            Intent intent = new Intent(ElementsActivity.this, ElementActivity.class);
+            intent.putExtra("id", "" + element.getId());
+            intent.putExtra("title", element.getTitle());
+            intent.putExtra("username", element.getUserName());
+            intent.putExtra("password", element.getPassword());
+            intent.putExtra("url", element.getUrl());
+            intent.putExtra("notes", element.getNotes());
+            startActivityForResult(intent, 1001);
         });
 
         GlobalApplication.getInstance().showProgress(ElementsActivity.this);
@@ -83,28 +79,22 @@ public class ElementsActivity extends Activity implements IElementAction{
                 .setIcon(android.R.drawable.ic_menu_help)
                 .setMessage(ElementsActivity.this.getString(R.string.confirm_delete, records.get(position).getTitle()))
                 .setCancelable(false)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        DbManager dbManager = GlobalApplication.getInstance().getDbManager();
-                        try {
-                            dbManager.openDatabase(GlobalApplication.getInstance().getPassword());
-                            dbManager.delete(records.get(position).getId());
-                        }catch (Exception e) {
-                            Toast.makeText(ElementsActivity.this, "Error:" +e.getMessage(), Toast.LENGTH_LONG).show();
-                        } finally {
-                            records = dbManager.getRecords();
-                            itemsAdapter.clear();
-                            itemsAdapter.addAll(records);
-                            itemsAdapter.notifyDataSetChanged();
-                            dialog.dismiss();
-                        }
+                .setPositiveButton(android.R.string.yes, (dialog1, id) -> {
+                    DbManager dbManager = GlobalApplication.getInstance().getDbManager();
+                    try {
+                        dbManager.openDatabase(GlobalApplication.getInstance().getPassword());
+                        dbManager.delete(records.get(position).getId());
+                    } catch (Exception e) {
+                        Toast.makeText(ElementsActivity.this, "Error:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                    } finally {
+                        records = dbManager.getRecords();
+                        itemsAdapter.clear();
+                        itemsAdapter.addAll(records);
+                        itemsAdapter.notifyDataSetChanged();
+                        dialog1.dismiss();
                     }
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+                .setNegativeButton(android.R.string.no, (dialog12, id) -> dialog12.dismiss());
 
         dialog.show();
     }
@@ -121,11 +111,6 @@ public class ElementsActivity extends Activity implements IElementAction{
 
         @Override
         protected Integer doInBackground(Void... params) {
-            /*
-            if (params.length != 1) {
-                throw new IllegalArgumentException("Must pass operation as argument (encrypted)");
-            }
-             */
             DbManager dbManager = null;
             try {
                 dbManager = GlobalApplication.getInstance().getDbManager();
@@ -154,12 +139,10 @@ public class ElementsActivity extends Activity implements IElementAction{
                 dialog.setTitle(R.string.app_name)
                         .setMessage(R.string.login_failed)
                         .setCancelable(false)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                                finish();
-                                android.os.Process.killProcess(Process.myPid());
-                            }
+                        .setPositiveButton(android.R.string.ok, (dialog, id) -> {
+                            dialog.dismiss();
+                            finish();
+                            Process.killProcess(Process.myPid());
                         });
                 dialog.show();
             }
@@ -173,7 +156,6 @@ public class ElementsActivity extends Activity implements IElementAction{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-
         return true;
     }
 

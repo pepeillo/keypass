@@ -16,8 +16,8 @@ import java.util.List;
 public class CustomListAdapter extends ArrayAdapter<ElementStructure> {
 
     private final IElementAction listener;
-    private Activity context;
-    private List<ElementStructure> records;
+    private final Activity context;
+    private final List<ElementStructure> records;
 
     public CustomListAdapter(Activity context, IElementAction listener, List<ElementStructure> records) {
         super(context, 0, records);
@@ -28,7 +28,7 @@ public class CustomListAdapter extends ArrayAdapter<ElementStructure> {
 
     @Override
     public View getView(int listPosition, View convertView, ViewGroup parent) {
-        final ElementStructure element = (ElementStructure) records.get(listPosition);
+        final ElementStructure element = records.get(listPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item, null);

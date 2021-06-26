@@ -1,12 +1,12 @@
 package es.jaf.example.kp;
 
 public class ElementStructure {
-    private long id;
-    private String title;
-    private String userName;
-    private String password;
-    private String url;
-    private String notes;
+    private final long id;
+    private final String title;
+    private final String userName;
+    private final String password;
+    private final String url;
+    private final String notes;
 
     public ElementStructure(long id, String title, String userName, String password, String url, String notes) {
         this.id = id;

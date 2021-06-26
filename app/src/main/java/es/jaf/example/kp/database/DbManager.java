@@ -18,7 +18,7 @@ public class DbManager {
     private static final String TAG = "DbCipherTable";
 
     private SQLiteDatabase mDatabase;
-    private DbCipherHelper mDbHelper;
+    private final DbCipherHelper mDbHelper;
 
     /**
      * Array of all columns in the table
