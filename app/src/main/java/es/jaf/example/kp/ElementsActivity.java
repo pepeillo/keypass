@@ -108,7 +108,6 @@ public class ElementsActivity extends Activity {
 
                 return 0;
             } catch (Exception e) {
-                Log.e("ZZZZ", e.getMessage(), e);
                 return 1;
             } finally {
                 if (dbManager != null) {

@@ -128,12 +128,7 @@ public class FolderPicker extends Activity {
     } // load List
 
 
-    Comparator<FilePojo> comparatorAscending = new Comparator<FilePojo>() {
-        @Override
-        public int compare(FilePojo f1, FilePojo f2) {
-            return f1.getName().compareTo(f2.getName());
-        }
-    };
+    Comparator<FilePojo> comparatorAscending = (f1, f2) -> f1.getName().compareTo(f2.getName());
 
 
     void showList() {
@@ -143,13 +138,7 @@ public class FolderPicker extends Activity {
             ListView listView = findViewById(R.id.fp_listView);
             listView.setAdapter(FolderAdapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    listClick(position);
-                }
-            });
+            listView.setOnItemClickListener((parent, view, position, id) -> listClick(position));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -217,18 +206,10 @@ public class FolderPicker extends Activity {
         dialog.setView(et);
 
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Create",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        createNewFolder(et.getText().toString());
-                    }
-                });
+                (arg0, arg1) -> createNewFolder(et.getText().toString()));
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
+                (arg0, arg1) -> {
 
-                    }
                 });
 
         dialog.show();

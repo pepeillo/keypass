@@ -10,7 +10,7 @@
     <string name="prompt_element">Elemento</string>
     <string name="prompt_import">Importar</string>
     <string name="prompt_change_password">Cambiar contraseña</string>
-    <string name="prompt_loading">Cargando datos...</string>
+    <string name="prompt_loading">Cargando datos…</string>
     <string name="prompt_data">Datos</string>
     <string name="tap_again">Pulsa de nuevo para salir.</string>
     <string name="prompt_exit">Salir</string>
@@ -41,5 +41,6 @@
     <string name="confirm_delete">¿Realmente deseas borrar el registro seleccionado?\nEsta operación no se puede
         deshacer.</string>
     <string name="prompt_new">Nuevo</string>
+    <string name="prompt_read_permissions">No se puede leer el fichero. Revisar los permisos.</string>
 
 </resources>

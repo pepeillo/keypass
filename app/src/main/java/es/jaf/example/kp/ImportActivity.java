@@ -2,11 +2,9 @@ package es.jaf.example.kp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +13,6 @@ import com.opencsv.CSVReader;
 import es.jaf.example.kp.database.DbManager;
 import es.jaf.example.kp.folderpicker.FolderPicker;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
@@ -35,49 +32,37 @@ public class ImportActivity extends Activity {
         View cmdSelect = findViewById(R.id.cmdSelect);
         chkDelete = findViewById(R.id.chkDelete);
         cmdImport = findViewById(R.id.cmdImport);
-        cmdSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ImportActivity.this, FolderPicker.class);
-                intent.putExtra("title", getString(R.string.prompt_select_a_file));
-                intent.putExtra("location", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
-                intent.putExtra("pickFiles", true);
-                startActivityForResult(intent, GlobalApplication.FOLDERPICKER_CODE);
-            }
+        cmdSelect.setOnClickListener(v -> {
+            Intent intent = new Intent(ImportActivity.this, FolderPicker.class);
+            intent.putExtra("title", getString(R.string.prompt_select_a_file));
+            intent.putExtra("location", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+            intent.putExtra("pickFiles", true);
+            startActivityForResult(intent, GlobalApplication.FOLDERPICKER_CODE);
         });
 
-        cmdImport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String filename = txtFile.getText().toString();
-                if (filename.length() > 0) {
-                    try {
-                        int recs = importCSV(filename, chkDelete.isChecked());
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ImportActivity.this);
-                        dialog.setTitle(R.string.app_name)
-                                .setMessage(getString(R.string.prompt_process_ok, recs))
-                                .setCancelable(false)
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                        finish();
-                                    }
-                                });
-                        dialog.show();
+        cmdImport.setOnClickListener(v -> {
+            String filename = txtFile.getText().toString();
+            if (filename.length() > 0) {
+                try {
+                    int recs = importCSV(filename, chkDelete.isChecked());
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ImportActivity.this);
+                    dialog.setTitle(R.string.app_name)
+                            .setMessage(getString(R.string.prompt_process_ok, recs))
+                            .setCancelable(false)
+                            .setPositiveButton(android.R.string.ok, (dialog1, id) -> {
+                                dialog1.dismiss();
+                                finish();
+                            });
+                    dialog.show();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ImportActivity.this);
-                        dialog.setTitle(R.string.app_name)
-                                .setMessage(R.string.prompt_process_err)
-                                .setCancelable(false)
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        dialog.show();
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ImportActivity.this);
+                    dialog.setTitle(R.string.app_name)
+                            .setMessage(R.string.prompt_process_err)
+                            .setCancelable(false)
+                            .setPositiveButton(android.R.string.ok, (dialog12, id) -> dialog12.dismiss());
+                    dialog.show();
                 }
             }
         });
@@ -92,23 +77,16 @@ public class ImportActivity extends Activity {
         }
     }
 
-    private int importCSV(String path, boolean delete) throws Exception {
+    private int importCSV(String path, boolean delete) {
         DbManager dbManager = GlobalApplication.getInstance().getDbManager();
         try {
             dbManager.openDatabase(GlobalApplication.getInstance().getPassword());
 
             File file = new File(path);
-            if (!file.exists()) {
-                Toast.makeText(this, "No existe " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-                return 0;
-            }
             if (!file.canRead()) {
-                Toast.makeText(this, "No puedo leer " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.prompt_read_permissions, Toast.LENGTH_SHORT).show();
                 return 0;
             }
-
-            FileReader fileReader = new FileReader(file);
-            BufferedReader buffer = new BufferedReader(fileReader);
 
             dbManager.beginTransaction();
             if (delete) {
@@ -119,10 +97,9 @@ public class ImportActivity extends Activity {
             List<String[]> myEntries = reader.readAll();
             for (String[] str: myEntries) {
                 counter++;
-                if (counter ==1) {
+                if (counter == 1) {
                     continue;
                 }
-
                 dbManager.addRecord(new ElementStructure(0, str[1], str[2], str[3], str[4], str[5]));
             }
 

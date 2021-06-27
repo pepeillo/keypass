@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.Window;
-import android.view.WindowManager;
 import es.jaf.example.kp.database.DbManager;
 
 public class GlobalApplication extends Application {

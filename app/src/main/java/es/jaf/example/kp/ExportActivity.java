@@ -2,14 +2,12 @@ package es.jaf.example.kp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 import es.jaf.example.kp.database.DbManager;
 import es.jaf.example.kp.folderpicker.FolderPicker;
 
@@ -21,7 +19,6 @@ import java.util.List;
 public class ExportActivity extends Activity {
 
     private TextView txtFile;
-    private ToggleButton chkDelete;
     private View cmdExport;
     private TextView txtFolder;
 
@@ -33,50 +30,38 @@ public class ExportActivity extends Activity {
         txtFile = findViewById(R.id.txtFile);
         txtFolder = findViewById(R.id.txtFolder);
         cmdExport = findViewById(R.id.cmdExport);
-        findViewById(R.id.cmdSelect).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ExportActivity.this, FolderPicker.class);
-                intent.putExtra("title", getString(R.string.prompt_select_a_folder));
-                intent.putExtra("location", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
-                intent.putExtra("pickFiles", false);
-                startActivityForResult(intent, GlobalApplication.FOLDERPICKER_CODE);
-            }
+        findViewById(R.id.cmdSelect).setOnClickListener(v -> {
+            Intent intent = new Intent(ExportActivity.this, FolderPicker.class);
+            intent.putExtra("title", getString(R.string.prompt_select_a_folder));
+            intent.putExtra("location", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+            intent.putExtra("pickFiles", false);
+            startActivityForResult(intent, GlobalApplication.FOLDERPICKER_CODE);
         });
 
-        cmdExport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String path = txtFolder.getText().toString();
-                String filename = txtFile.getText().toString();
-                if (filename.length() > 0 && path.length() > 0) {
-                    try {
-                        int recs = exportCSV(path + "/" + filename);
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ExportActivity.this);
-                        dialog.setTitle(R.string.app_name)
-                                .setMessage(getString(R.string.prompt_process_ok, recs))
-                                .setCancelable(false)
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                        finish();
-                                    }
-                                });
-                        dialog.show();
+        cmdExport.setOnClickListener(v -> {
+            String path = txtFolder.getText().toString();
+            String filename = txtFile.getText().toString();
+            if (filename.length() > 0 && path.length() > 0) {
+                try {
+                    int recs = exportCSV(path + "/" + filename);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ExportActivity.this);
+                    dialog.setTitle(R.string.app_name)
+                            .setMessage(getString(R.string.prompt_process_ok, recs))
+                            .setCancelable(false)
+                            .setPositiveButton(android.R.string.ok, (dialog12, id) -> {
+                                dialog12.dismiss();
+                                finish();
+                            });
+                    dialog.show();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(ExportActivity.this);
-                        dialog.setTitle(R.string.app_name)
-                                .setMessage(R.string.prompt_process_err)
-                                .setCancelable(false)
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        dialog.show();
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ExportActivity.this);
+                    dialog.setTitle(R.string.app_name)
+                            .setMessage(R.string.prompt_process_err)
+                            .setCancelable(false)
+                            .setPositiveButton(android.R.string.ok, (dialog1, id) -> dialog1.dismiss());
+                    dialog.show();
                 }
             }
         });

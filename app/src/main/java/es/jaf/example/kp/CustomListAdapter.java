@@ -1,16 +1,13 @@
 package es.jaf.example.kp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import es.jaf.example.kp.database.DbManager;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-import java.io.File;
 import java.util.List;
 
 public class CustomListAdapter extends ArrayAdapter<ElementStructure> {
