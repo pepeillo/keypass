@@ -40,7 +40,9 @@ public class ChangePasswordActivity extends Activity {
                             errorId = R.string.err_pwd3;
                             //No se ha podido cambiar la contraseña
                         } finally {
-                            dbManager.closeDatabase();
+                            if (dbManager != null) {
+                                dbManager.closeDatabase();
+                            }
                         }
                     }
                 }

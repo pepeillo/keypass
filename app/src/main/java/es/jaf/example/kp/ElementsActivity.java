@@ -104,8 +104,6 @@ public class ElementsActivity extends Activity {
                 dbManager = GlobalApplication.getInstance().getDbManager();
                 dbManager.openDatabase(pwd);
                 records = dbManager.getRecords();
-                dbManager.closeDatabase();
-
                 return 0;
             } catch (Exception e) {
                 return 1;
