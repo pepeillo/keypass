@@ -44,8 +44,16 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text=""
+                    android:inputType="textPassword"
                     android:layout_weight="1"
                     android:id="@+id/elPassword"/>
+            <ImageView
+                    android:id="@+id/cmdHideShow"
+                    android:src="@drawable/show"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+
         </TableRow>
         <TableRow>
             <TextView

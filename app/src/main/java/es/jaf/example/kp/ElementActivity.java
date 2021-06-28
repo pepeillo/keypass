@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class ElementActivity extends Activity {
     private String id;
@@ -53,6 +56,22 @@ public class ElementActivity extends Activity {
             setResult(Activity.RESULT_OK, intent1);
             finish();
         });
+        EditText txtPwd = findViewById(R.id.elPassword);
+        ImageView cmdHideShow = findViewById(R.id.cmdHideShow);
+
+        cmdHideShow.setOnClickListener(view -> {
+            if (txtPwd.getTransformationMethod() instanceof PasswordTransformationMethod) {
+                txtPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                cmdHideShow.setImageResource(R.drawable.hide);
+            } else {
+                txtPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                cmdHideShow.setImageResource(R.drawable.show);
+            }
+        });
+        if ("0".equals(id)) {
+            cmdHideShow.callOnClick();
+        }
+
     }
 
     @Override

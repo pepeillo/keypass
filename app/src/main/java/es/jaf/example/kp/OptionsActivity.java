@@ -33,8 +33,8 @@ public class OptionsActivity extends Activity {
             Toast.makeText(this, R.string.tap_again, Toast.LENGTH_SHORT).show();
         } else {
             GlobalApplication.getInstance().getDbManager().closeDatabase();
-            finish();
             android.os.Process.killProcess(Process.myPid());
+            finish();
         }
     }
 }

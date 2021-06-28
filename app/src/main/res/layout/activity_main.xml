@@ -26,6 +26,12 @@
                     android:hint="@string/prompt_password"
                     android:inputType="textPassword"
                     android:selectAllOnFocus="true"/>
+            <ImageView
+                    android:id="@+id/cmdHideShow"
+                    android:src="@drawable/show"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
         </TableRow>
         <TableRow>
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"/>
