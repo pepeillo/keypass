@@ -42,5 +42,10 @@
         deshacer.</string>
     <string name="prompt_new">Nuevo</string>
     <string name="prompt_read_permissions">No se puede leer el fichero. Revisar los permisos.</string>
+    <string name="auth_failed">Autenticación erronea...!</string>
+    <string name="auth_error">Error autenticando:</string>
+    <string name="auth_title">Autenticación biométrica</string>
+    <string name="btn_auth">Clic para autenticarte</string>
+    <string name="prompt_auth">Autenticar</string>
 
 </resources>

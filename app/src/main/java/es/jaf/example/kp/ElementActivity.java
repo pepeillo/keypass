@@ -62,10 +62,10 @@ public class ElementActivity extends Activity {
         cmdHideShow.setOnClickListener(view -> {
             if (txtPwd.getTransformationMethod() instanceof PasswordTransformationMethod) {
                 txtPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                cmdHideShow.setImageResource(R.drawable.hide);
+                cmdHideShow.setImageResource(R.drawable.show);
             } else {
                 txtPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                cmdHideShow.setImageResource(R.drawable.show);
+                cmdHideShow.setImageResource(R.drawable.hide);
             }
         });
         if ("0".equals(id)) {

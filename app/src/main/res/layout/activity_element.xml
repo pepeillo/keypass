@@ -49,11 +49,10 @@
                     android:id="@+id/elPassword"/>
             <ImageView
                     android:id="@+id/cmdHideShow"
-                    android:src="@drawable/show"
+                    android:src="@drawable/hide"
                     android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
-
         </TableRow>
         <TableRow>
             <TextView

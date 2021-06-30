@@ -3,7 +3,10 @@ package es.jaf.example.kp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
+import android.widget.ImageView;
 import es.jaf.example.kp.database.DbManager;
 
 public class ChangePasswordActivity extends Activity {
@@ -15,6 +18,22 @@ public class ChangePasswordActivity extends Activity {
         final EditText txtCurrent = findViewById(R.id.txtCurrentPwd);
         final EditText txtNew1 = findViewById(R.id.txtNewPwd1);
         final EditText txtNew2 = findViewById(R.id.txtNewPwd2);
+        ImageView cmdHideShow = findViewById(R.id.cmdHideShow);
+
+        cmdHideShow.setOnClickListener(view -> {
+            if (txtCurrent.getTransformationMethod() instanceof PasswordTransformationMethod) {
+                txtCurrent.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                txtNew1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                txtNew2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                cmdHideShow.setImageResource(R.drawable.show);
+            } else {
+                txtCurrent.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                txtNew1.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                txtNew2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                cmdHideShow.setImageResource(R.drawable.hide);
+            }
+        });
+
         findViewById(R.id.cmdChangePwd).setOnClickListener(v -> {
             String current = txtCurrent.getText().toString();
             String new1 = txtNew1.getText().toString();
