@@ -37,7 +37,7 @@ public class ElementStructure {
     }
     @Override
     public String toString() {
-        return "\"Raíz\"," +
+        return "\"Group\"," +
                 "\"" + title.replace("\"", "\"\"") + "\"," +
                 "\"" + userName.replace("\"", "\"\"") + "\"," +
                 "\"" + password.replace("\"", "\"\"") + "\"," +
