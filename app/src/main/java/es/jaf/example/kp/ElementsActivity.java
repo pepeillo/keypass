@@ -29,6 +29,7 @@ public class ElementsActivity extends Activity {
             ElementStructure element = records.get(position);
             Intent intent = new Intent(ElementsActivity.this, ElementActivity.class);
             intent.putExtra("id", "" + element.getId());
+            intent.putExtra("group", element.getGroup());
             intent.putExtra("title", element.getTitle());
             intent.putExtra("username", element.getUserName());
             intent.putExtra("password", element.getPassword());
@@ -49,6 +50,7 @@ public class ElementsActivity extends Activity {
                 String action = data.getStringExtra("action");
 
                 String id = data.getStringExtra("id");
+                String group = data.getStringExtra("group");
                 String title = data.getStringExtra("title");
                 String userName = data.getStringExtra("username");
                 String password = data.getStringExtra("password");
@@ -58,9 +60,9 @@ public class ElementsActivity extends Activity {
                     DbManager dbManager = GlobalApplication.getInstance().getDbManager();
                     dbManager.openDatabase(GlobalApplication.getInstance().getPassword());
                     if ("0".equals(id)) {
-                        dbManager.addRecord(new ElementStructure(Integer.parseInt(id), title, userName, password, url, notes));
+                        dbManager.addRecord(new ElementStructure(Integer.parseInt(id), group, title, userName, password, url, notes));
                     } else {
-                        dbManager.updateRecord(new ElementStructure(Integer.parseInt(id), title, userName, password, url, notes));
+                        dbManager.updateRecord(new ElementStructure(Integer.parseInt(id), group, title, userName, password, url, notes));
                     }
                     records = dbManager.getRecords();
                     itemsAdapter.clear();

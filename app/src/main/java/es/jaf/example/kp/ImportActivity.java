@@ -100,7 +100,7 @@ public class ImportActivity extends Activity {
                 if (counter == 1) {
                     continue;
                 }
-                dbManager.addRecord(new ElementStructure(0, str[1], str[2], str[3], str[4], str[5]));
+                dbManager.addRecord(new ElementStructure(0, str[0], str[1], str[2], str[3], str[4], str[5]));
             }
 
             dbManager.setTransactionSuccessful();

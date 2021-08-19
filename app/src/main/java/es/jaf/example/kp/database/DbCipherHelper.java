@@ -8,6 +8,7 @@ public class DbCipherHelper extends SQLiteOpenHelper {
     public static final String TABLE_TARGET = "table_result";
 
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_GROUP = "col_group";
     public static final String COLUMN_TITLE = "col_title";
     public static final String COLUMN_USERNAME= "col_username";
     public static final String COLUMN_PASSWORD= "col_password";
@@ -15,9 +16,10 @@ public class DbCipherHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NOTES= "col_notes";
 
     // Database creation sql statement
-    private static final String DATABASE_CREATE = "create table "
+    private static final String DATABASE_CREATE = "create table IF NOT EXISTS "
             + TABLE_TARGET + "(" + COLUMN_ID
             + " integer primary key autoincrement, "
+            + COLUMN_GROUP + " text, "
             + COLUMN_TITLE + " text, "
             + COLUMN_USERNAME+ " text, "
             + COLUMN_PASSWORD+ " text, "
@@ -26,7 +28,7 @@ public class DbCipherHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "4366839f3cc7d75bd64db6bab4f4cf47";
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public DbCipherHelper(Context context) {
         //super(context, android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + BuildConfig.APPLICATION_ID + "/" + DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,9 +42,8 @@ public class DbCipherHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //Upgrading database from version " + oldVersion + " to "+ newVersion
-        //will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TARGET);
-        onCreate(db);
+        if (oldVersion == 2) {
+            db.execSQL("ALTER TABLE " + TABLE_TARGET + " ADD COLUMN " + COLUMN_GROUP + " text");
+        }
     }
 } 

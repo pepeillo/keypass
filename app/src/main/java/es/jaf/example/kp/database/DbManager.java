@@ -25,6 +25,7 @@ public class DbManager {
      */
     private final String[] mAllColumns = {
             DbCipherHelper.COLUMN_ID,
+            DbCipherHelper.COLUMN_GROUP,
             DbCipherHelper.COLUMN_TITLE,
             DbCipherHelper.COLUMN_USERNAME,
             DbCipherHelper.COLUMN_PASSWORD,
@@ -61,6 +62,7 @@ public class DbManager {
      */
     public ElementStructure addRecord(final ElementStructure record) {
         ContentValues values = new ContentValues();
+        values.put(DbCipherHelper.COLUMN_GROUP, record.getGroup());
         values.put(DbCipherHelper.COLUMN_TITLE, record.getTitle());
         values.put(DbCipherHelper.COLUMN_USERNAME, record.getUserName());
         values.put(DbCipherHelper.COLUMN_PASSWORD, record.getPassword());
@@ -88,6 +90,7 @@ public class DbManager {
      */
     public ElementStructure updateRecord(final ElementStructure record) {
         ContentValues values = new ContentValues();
+        values.put(DbCipherHelper.COLUMN_GROUP, record.getGroup());
         values.put(DbCipherHelper.COLUMN_TITLE, record.getTitle());
         values.put(DbCipherHelper.COLUMN_USERNAME, record.getUserName());
         values.put(DbCipherHelper.COLUMN_PASSWORD, record.getPassword());
@@ -125,9 +128,19 @@ public class DbManager {
      * @return List of dbQuake objects
      */
     public List<ElementStructure> getRecords() {
+        String allCols = DbCipherHelper.COLUMN_ID + "," +
+                DbCipherHelper.COLUMN_GROUP + "," +
+                DbCipherHelper.COLUMN_TITLE + "," +
+                DbCipherHelper.COLUMN_USERNAME + "," +
+                DbCipherHelper.COLUMN_PASSWORD + "," +
+                DbCipherHelper.COLUMN_URL + "," +
+                DbCipherHelper.COLUMN_NOTES;
+
         List<ElementStructure> selectedRecords = new ArrayList<>();
-        Cursor cursor =mDatabase.rawQuery("SELECT * from " + DbCipherHelper.TABLE_TARGET +
-                " ORDER BY " + DbCipherHelper.COLUMN_TITLE + " COLLATE NOCASE ASC;", null);
+        Cursor cursor =mDatabase.rawQuery("SELECT " + allCols +
+                " FROM " + DbCipherHelper.TABLE_TARGET +
+                " ORDER BY " + DbCipherHelper.COLUMN_TITLE +
+                " COLLATE NOCASE ASC;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ElementStructure record = cursorToRecord(cursor);
@@ -181,6 +194,7 @@ public class DbManager {
                 cursor.getString(2),
                 cursor.getString(3),
                 cursor.getString(4),
-                cursor.getString(5));
+                cursor.getString(5),
+                cursor.getString(6));
     }
 }
