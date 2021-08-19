@@ -42,7 +42,7 @@ public class DbCipherHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 2) {
+        if (oldVersion < 3) {
             db.execSQL("ALTER TABLE " + TABLE_TARGET + " ADD COLUMN " + COLUMN_GROUP + " text");
         }
     }
