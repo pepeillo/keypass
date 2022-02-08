@@ -34,7 +34,7 @@ public class FolderPicker extends Activity {
         setContentView(R.layout.fp_main_layout);
 
         if (!isExternalStorageReadable()) {
-            Toast.makeText(this, "Storage access permission not given", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.storage_perm, Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -73,7 +73,6 @@ public class FolderPicker extends Activity {
         }
 
         loadLists(location);
-
     }
 
     /* Checks if external storage is available to at least read */
@@ -85,11 +84,11 @@ public class FolderPicker extends Activity {
 
     void loadLists(String location) {
         try {
-
             File folder = new File(location);
 
-            if (!folder.isDirectory())
+            if (!folder.isDirectory()) {
                 exit();
+            }
 
             tv_location.setText( getString(R.string.prompt_location) + " : " + folder.getAbsolutePath());
             File[] files = folder.listFiles();
@@ -124,12 +123,9 @@ public class FolderPicker extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     } // load List
 
-
     Comparator<FilePojo> comparatorAscending = (f1, f2) -> f1.getName().compareTo(f2.getName());
-
 
     void showList() {
 
@@ -143,12 +139,10 @@ public class FolderPicker extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
     void listClick(int position) {
-
         if (pickFiles && !folderAndFileList.get(position).isFolder()) {
             String data = location + File.separator + folderAndFileList.get(position).getName();
             receivedIntent.putExtra("data", data);
@@ -158,7 +152,6 @@ public class FolderPicker extends Activity {
             location = location + File.separator + folderAndFileList.get(position).getName();
             loadLists(location);
         }
-
     }
 
     @Override
@@ -167,7 +160,6 @@ public class FolderPicker extends Activity {
     }
 
     public void goBack(View v) {
-
         if (location != null && !location.equals("") && !location.equals("/")) {
             int start = location.lastIndexOf('/');
             location = location.substring(0, start);
@@ -175,7 +167,6 @@ public class FolderPicker extends Activity {
         }else{
             exit();
         }
-
     }
 
     void exit(){
@@ -185,7 +176,6 @@ public class FolderPicker extends Activity {
 
     void createNewFolder(String filename) {
         try {
-
             File file = new File(location + File.separator + filename);
             file.mkdirs();
             loadLists(location);
@@ -195,7 +185,6 @@ public class FolderPicker extends Activity {
             Toast.makeText(this, "Error:" + e.toString(), Toast.LENGTH_LONG)
                     .show();
         }
-
     }
 
     public void newFolderDialog(View v) {
@@ -205,22 +194,17 @@ public class FolderPicker extends Activity {
         final EditText et = new EditText(this);
         dialog.setView(et);
 
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Create",
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.str_create),
                 (arg0, arg1) -> createNewFolder(et.getText().toString()));
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-                (arg0, arg1) -> {
-
-                });
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(android.R.string.cancel),
+                (arg0, arg1) -> { });
 
         dialog.show();
-
     }
 
-
     public void select(View v) {
-
         if (pickFiles) {
-            Toast.makeText(this, "You have to select a file", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.select_file, Toast.LENGTH_LONG).show();
         } else if (receivedIntent != null) {
             receivedIntent.putExtra("data", location);
             setResult(RESULT_OK, receivedIntent);
@@ -228,10 +212,7 @@ public class FolderPicker extends Activity {
         }
     }
 
-
     public void cancel(View v) {
         exit();
     }
-
-
 } // class

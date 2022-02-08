@@ -97,14 +97,14 @@ public class ElementActivity extends Activity {
                     .setIcon(android.R.drawable.ic_menu_help)
                     .setMessage(ElementActivity.this.getString(R.string.confirm_delete))
                     .setCancelable(false)
-                    .setPositiveButton(android.R.string.yes, (dlg, ide) -> {
+                    .setPositiveButton(android.R.string.ok, (dlg, ide) -> {
                         Intent intent = new Intent();
                         intent.putExtra("action", "delete");
                         intent.putExtra("id", id);
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                     })
-                    .setNegativeButton(android.R.string.no, (dlg, ide) -> {
+                    .setNegativeButton(android.R.string.cancel, (dlg, ide) -> {
                         setResult(Activity.RESULT_OK, new Intent());
                         finish();
                     });
