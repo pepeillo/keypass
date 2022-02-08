@@ -18,7 +18,6 @@ import java.io.FileReader;
 import java.util.List;
 
 public class ImportActivity extends Activity {
-
     private TextView txtFile;
     private ToggleButton chkDelete;
     private View cmdImport;
@@ -112,5 +111,4 @@ public class ImportActivity extends Activity {
         }
         return 0;
     }
-
 }

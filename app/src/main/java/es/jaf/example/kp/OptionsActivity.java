@@ -7,8 +7,6 @@ import android.os.Process;
 import android.widget.Toast;
 
 public class OptionsActivity extends Activity {
-
-
     private long backPressedTime;
 
     @Override

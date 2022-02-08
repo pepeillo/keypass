@@ -141,7 +141,6 @@ public class FolderPicker extends Activity {
         }
     }
 
-
     void listClick(int position) {
         if (pickFiles && !folderAndFileList.get(position).isFolder()) {
             String data = location + File.separator + folderAndFileList.get(position).getName();

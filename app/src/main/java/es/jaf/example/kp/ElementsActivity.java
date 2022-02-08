@@ -39,7 +39,7 @@ public class ElementsActivity extends Activity {
         });
 
         GlobalApplication.getInstance().showProgress(ElementsActivity.this);
-        new ElementsActivity.AsyncGenerateCipherDatabase().execute();
+        new AsyncGenerateCipherDatabase().execute();
     }
 
     @Override
@@ -132,10 +132,6 @@ public class ElementsActivity extends Activity {
                         });
                 dialog.show();
             }
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
         }
     }
 

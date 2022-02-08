@@ -12,7 +12,6 @@ import es.jaf.example.kp.R;
 import java.util.ArrayList;
 
 public class FolderAdapter extends ArrayAdapter<FilePojo> {
-
 	Activity context;
 	ArrayList<FilePojo> dataList;
 
@@ -21,7 +20,6 @@ public class FolderAdapter extends ArrayAdapter<FilePojo> {
 		super(context, R.layout.fp_filerow, dataList);
 		this.context = context;
 		this.dataList = dataList;
-
 	}
 
 	@Override
@@ -32,12 +30,9 @@ public class FolderAdapter extends ArrayAdapter<FilePojo> {
 		ImageView imageView = convertView.findViewById(R.id.fp_iv_icon);
 		TextView name = convertView.findViewById(R.id.fp_tv_name);
 		
-		if( dataList.get(position).isFolder() )
-		{
+		if( dataList.get(position).isFolder() ) {
 			imageView.setImageResource( R.drawable.fp_folder);
-		}
-		else
-		{
+		} else {
 			imageView.setImageResource( R.drawable.fp_file);
 		}
 
@@ -45,5 +40,4 @@ public class FolderAdapter extends ArrayAdapter<FilePojo> {
 
 		return convertView;
 	}
-
 }

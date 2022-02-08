@@ -36,5 +36,4 @@ public class CustomListAdapter extends ArrayAdapter<ElementStructure> {
     public boolean hasStableIds() {
         return false;
     }
-
 }

@@ -71,7 +71,6 @@ public class ElementActivity extends Activity {
         if ("0".equals(id)) {
             cmdHideShow.callOnClick();
         }
-
     }
 
     @Override

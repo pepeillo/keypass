@@ -88,6 +88,5 @@ public class ChangePasswordActivity extends Activity {
                 dialog.show();
             }
         });
-
     }
 }

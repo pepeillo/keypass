@@ -17,7 +17,6 @@ import java.io.FileWriter;
 import java.util.List;
 
 public class ExportActivity extends Activity {
-
     private TextView txtFile;
     private View cmdExport;
     private TextView txtFolder;

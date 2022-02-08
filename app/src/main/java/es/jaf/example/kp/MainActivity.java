@@ -1,5 +1,6 @@
 package es.jaf.example.kp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,12 +10,10 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
 import android.widget.ImageView;
-import androidx.fragment.app.FragmentActivity;
 import es.jaf.example.kp.database.DbManager;
 import net.sqlcipher.database.SQLiteDatabase;
 
-public class MainActivity extends FragmentActivity {
-
+public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,10 +93,6 @@ public class MainActivity extends FragmentActivity {
                         });
                 dialog.show();
             }
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
         }
     }
 }

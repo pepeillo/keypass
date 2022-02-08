@@ -1,7 +1,6 @@
 package es.jaf.example.kp.folderpicker;
 
 public class FilePojo {
-
     private String name;
     private boolean folder;
 
