@@ -10,9 +10,6 @@ import net.sqlcipher.database.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @see {@link net.sqlcipher.database.SQLiteDatabase}
- */
 public class DbManager {
     @SuppressWarnings("unused")
     private static final String TAG = "DbCipherTable";
@@ -85,8 +82,8 @@ public class DbManager {
 
     /**
      * Update a record from the database table
-     * @param record
-     * @return
+     * @param record record
+     * @return structure
      */
     public ElementStructure updateRecord(final ElementStructure record) {
         ContentValues values = new ContentValues();
@@ -176,7 +173,7 @@ public class DbManager {
 
     /**
      * Change the password of database
-     * @param newPassword
+     * @param newPassword new password
      */
     public void changePassword(String newPassword) {
         mDatabase.changePassword(newPassword);
